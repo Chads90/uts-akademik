@@ -14,10 +14,10 @@
                 <div class="p-6 text-gray-900">
                     
                     <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
-                        <h4 class="mb-0 fw-bold text-dark" style="color: #003366;">
+                        <h4 class="mb-0 fw-bold text-dark">
                             <i class="bi bi-building me-2 text-primary"></i> Data Jurusan
                         </h4>
-                        <a href="{{ route('jurusan.create') }}" class="btn btn-primary shadow-sm rounded-pill px-4 fw-medium">
+                        <a href="{{ route('jurusan.create') }}" class="btn btn-primary text-white shadow-sm rounded-pill px-4 fw-medium">
                             <i class="bi bi-plus-circle me-1"></i> Tambah Jurusan
                         </a>
                     </div>
@@ -48,37 +48,71 @@
                             <tbody>
                                 @foreach($jurusans as $index => $jurusan)
                                 <tr>
-                                    <td class="text-center fw-bold text-muted">{{ $jurusans->firstItem() + $index }}</td>
+                                    <td class="text-center fw-bold text-muted">{{ (isset($jurusans->firstItem) ? $jurusans->firstItem() : 1) + $index }}</td>
+                                    
                                     <td class="fw-medium">{{ $jurusan->nama_jurusan }}</td>
+                                    
                                     <td class="text-center">
-                                        <span class="badge bg-success rounded-pill px-3">{{ $jurusan->akreditasi }}</span>
+                                        @if($jurusan->akreditasi == 'Unggul' || $jurusan->akreditasi == 'A')
+                                            <span class="badge bg-success px-3 py-2 rounded-pill">{{ $jurusan->akreditasi }}</span>
+                                        @elseif($jurusan->akreditasi == 'B')
+                                            <span class="badge bg-primary px-3 py-2 rounded-pill">{{ $jurusan->akreditasi }}</span>
+                                        @else
+                                            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">{{ $jurusan->akreditasi }}</span>
+                                        @endif
                                     </td>
+                                    
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="{{ route('jurusan.edit', $jurusan->kode_jurusan ?? $jurusan->id_jurusan ?? $jurusan->id) }}" class="btn btn-sm btn-outline-warning rounded-pill px-3">
+                                            <a href="{{ route('jurusan.edit', $jurusan->id_jurusan ?? $jurusan->id) }}" class="btn btn-sm btn-outline-warning rounded-pill px-3">
                                                 <i class="bi bi-pencil-square"></i> Edit
                                             </a>
-                                            <form action="{{ route('jurusan.destroy', $jurusan->kode_jurusan ?? $jurusan->id_jurusan ?? $jurusan->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3">
-                                                    <i class="bi bi-trash"></i> Hapus
-                                                </button>
-                                            </form>
+                                            
+                                            <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $jurusan->id_jurusan ?? $jurusan->id }}">
+                                                <i class="bi bi-trash"></i> Hapus
+                                            </button>
                                         </div>
-                                    </td>
+
+                                        <div class="modal fade" id="deleteModal{{ $jurusan->id_jurusan ?? $jurusan->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content border-0 shadow">
+                                                    <div class="modal-header border-bottom-0">
+                                                        <h5 class="modal-title fw-bold" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body text-center py-4">
+                                                        <i class="bi bi-exclamation-circle text-danger mb-3 d-block" style="font-size: 4rem;"></i>
+                                                        <h5 class="fw-bold mb-2">Yakin ingin menghapus data ini?</h5>
+                                                        <p class="text-muted mb-0">Jurusan <strong>{{ $jurusan->nama_jurusan }}</strong> akan dihapus secara permanen dan tidak dapat dikembalikan.</p>
+                                                    </div>
+                                                    <div class="modal-footer border-top-0 justify-content-center pb-4">
+                                                        <button type="button" class="btn btn-light px-4 rounded-pill border" data-bs-dismiss="modal">Batal</button>
+                                                        <form action="{{ route('jurusan.destroy', $jurusan->id_jurusan ?? $jurusan->id) }}" method="POST" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">Ya, Hapus Data</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     
+                    @if(method_exists($jurusans, 'links'))
                     <div class="mt-4 d-flex justify-content-end">
                         {{ $jurusans->links('pagination::bootstrap-5') }}
                     </div>
-
+                    @endif
+                    
                 </div>
             </div>
+            
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         </div>
     </div>
 </x-app-layout>

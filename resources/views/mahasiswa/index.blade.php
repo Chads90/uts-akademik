@@ -65,15 +65,36 @@
                                             <a href="{{ route('mahasiswa.edit', $mahasiswa->id_mahasiswa) }}" class="btn btn-sm btn-outline-warning rounded-pill px-3">
                                                 <i class="bi bi-pencil-square"></i> Edit
                                             </a>
-                                            <form action="{{ route('mahasiswa.destroy', $mahasiswa->id_mahasiswa) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3">
-                                                    <i class="bi bi-trash"></i> Hapus
-                                                </button>
-                                            </form>
+                                            
+                                            <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#deleteModalMhs{{ $mahasiswa->id_mahasiswa }}">
+                                                <i class="bi bi-trash"></i> Hapus
+                                            </button>
                                         </div>
-                                    </td>
+
+                                        <div class="modal fade" id="deleteModalMhs{{ $mahasiswa->id_mahasiswa }}" tabindex="-1" aria-labelledby="deleteModalMhsLabel{{ $mahasiswa->id_mahasiswa }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content border-0 shadow">
+                                                    <div class="modal-header border-bottom-0">
+                                                        <h5 class="modal-title fw-bold" id="deleteModalMhsLabel{{ $mahasiswa->id_mahasiswa }}">Konfirmasi Hapus</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body text-center py-4">
+                                                        <i class="bi bi-exclamation-circle text-danger mb-3 d-block" style="font-size: 4rem;"></i>
+                                                        <h5 class="fw-bold mb-2">Yakin ingin menghapus data ini?</h5>
+                                                        <p class="text-muted mb-0">Mahasiswa <strong>{{ $mahasiswa->nama }}</strong> ({{ $mahasiswa->nim }}) akan dihapus secara permanen.</p>
+                                                    </div>
+                                                    <div class="modal-footer border-top-0 justify-content-center pb-4">
+                                                        <button type="button" class="btn btn-light px-4 rounded-pill border" data-bs-dismiss="modal">Batal</button>
+                                                        <form action="{{ route('mahasiswa.destroy', $mahasiswa->id_mahasiswa) }}" method="POST" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">Ya, Hapus Data</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -86,6 +107,8 @@
                     
                 </div>
             </div>
+            
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         </div>
     </div>
 </x-app-layout>

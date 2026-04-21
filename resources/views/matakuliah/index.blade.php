@@ -42,8 +42,7 @@
                                     <th scope="col" class="text-center" style="width: 50px;">NO</th>
                                     <th scope="col">KODE MK</th>
                                     <th scope="col">NAMA MATAKULIAH</th>
-                                    <th scope="col">SKS</th>
-                                    <!-- PENAMBAHAN KOLOM JURUSAN (Sesuai Soal Poin 4.3) -->
+                                    <th scope="col" class="text-center">SKS</th>
                                     <th scope="col">JURUSAN</th>
                                     <th scope="col" class="text-center" style="width: 180px;">AKSI</th>
                                 </tr>
@@ -55,7 +54,6 @@
                                     <td><span class="badge bg-dark">{{ $mk->kode_mk ?? 'MK-'.$mk->id_matakuliah }}</span></td>
                                     <td class="fw-medium">{{ $mk->nama_matakuliah }}</td>
                                     <td class="text-center fw-bold">{{ $mk->sks }}</td>
-                                    <!-- MENAMPILKAN RELASI JURUSAN -->
                                     <td>
                                         <span class="text-primary fw-medium">
                                             {{ $mk->jurusan->nama_jurusan ?? 'Tidak Ada' }}
@@ -66,14 +64,36 @@
                                             <a href="{{ route('matakuliah.edit', $mk->id_matakuliah) }}" class="btn btn-sm btn-outline-warning rounded-pill px-3">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
-                                            <form action="{{ route('matakuliah.destroy', $mk->id_matakuliah) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?');">
-                                                @csrf @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </form>
+                                            
+                                            <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#deleteModalMk{{ $mk->id_matakuliah }}">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
                                         </div>
-                                    </td>
+
+                                        <div class="modal fade" id="deleteModalMk{{ $mk->id_matakuliah }}" tabindex="-1" aria-labelledby="deleteModalMkLabel{{ $mk->id_matakuliah }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content border-0 shadow">
+                                                    <div class="modal-header border-bottom-0">
+                                                        <h5 class="modal-title fw-bold" id="deleteModalMkLabel{{ $mk->id_matakuliah }}">Konfirmasi Hapus</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body text-center py-4">
+                                                        <i class="bi bi-exclamation-circle text-danger mb-3 d-block" style="font-size: 4rem;"></i>
+                                                        <h5 class="fw-bold mb-2">Yakin ingin menghapus data ini?</h5>
+                                                        <p class="text-muted mb-0">Matakuliah <strong>{{ $mk->nama_matakuliah }}</strong> ({{ $mk->kode_mk ?? 'MK-'.$mk->id_matakuliah }}) akan dihapus secara permanen.</p>
+                                                    </div>
+                                                    <div class="modal-footer border-top-0 justify-content-center pb-4">
+                                                        <button type="button" class="btn btn-light px-4 rounded-pill border" data-bs-dismiss="modal">Batal</button>
+                                                        <form action="{{ route('matakuliah.destroy', $mk->id_matakuliah) }}" method="POST" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">Ya, Hapus Data</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -85,6 +105,8 @@
                     </div>
                 </div>
             </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         </div>
     </div>
 </x-app-layout>
