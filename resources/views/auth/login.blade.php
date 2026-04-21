@@ -6,7 +6,6 @@
         .login-wrapper {
             background: linear-gradient(135deg, #f4f7f6 0%, #e0eaf5 100%);
             min-height: 100vh;
-            /* Trik agar menutupi layout bawaan tailwind */
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 9999;
@@ -93,11 +92,21 @@
                     @endif
                 </div>
 
-                <div class="d-grid mt-2">
+                <div class="d-grid mt-2 mb-4">
                     <button type="submit" class="btn btn-login text-white rounded-pill py-2 fw-bold shadow-sm">
                         Masuk <i class="bi bi-box-arrow-in-right ms-1"></i>
                     </button>
                 </div>
+
+                @if (Route::has('register'))
+                <div class="text-center mt-3 pt-3 border-top">
+                    <p class="text-muted small mb-0">Belum punya akun? 
+                        <a href="{{ route('register') }}" class="fw-bold text-decoration-none" style="color: #003366;">
+                            Daftar Sekarang
+                        </a>
+                    </p>
+                </div>
+                @endif
                 
             </form>
         </div>
