@@ -70,9 +70,10 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                            <x-dropdown-link href="javascript:void(0)" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#logoutModal"
+                                            class="text-danger fw-bold">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
@@ -112,13 +113,40 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                    <x-responsive-nav-link href="javascript:void(0)" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#logoutModal">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 15px;">
+            <div class="modal-header border-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <div class="bg-light text-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                    <i class="bi bi-box-arrow-right fs-1"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Konfirmasi Keluar</h5>
+                <p class="text-secondary mb-0">Apakah Anda yakin ingin mengakhiri sesi ini dan keluar dari aplikasi?</p>
+            </div>
+            <div class="modal-footer border-0 justify-content-center pb-4">
+                <button type="button" class="btn btn-light border px-4 rounded-pill fw-medium text-secondary" data-bs-dismiss="modal">Batal</button>
+                
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-danger px-4 rounded-pill fw-medium shadow-sm">
+                        Ya, Keluar Sekarang
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </nav>
