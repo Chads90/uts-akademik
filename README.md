@@ -39,7 +39,7 @@ Proyek ini mengimplementasikan konsep relasi antar tabel (One-to-Many) untuk int
 ---
 
 ### ⚙️ Teknologi yang Digunakan
-* **Framework:** Laravel 12
+* **Framework:** Laravel 12.56.0
 * **Frontend:** Bootstrap 5.3 & Bootstrap Icons
 * **Library:** Laravel Breeze (Starter Kit)
 * **Database:** MySQL
