@@ -18,7 +18,8 @@ class MahasiswaController extends Controller
                 return $query->where('nama', 'like', "%{$search}%")
                              ->orWhere('nim', 'like', "%{$search}%");
             })
-            ->paginate(5); // Membatasi 5 data per halaman
+            // withQueryString() ditambahkan agar saat pindah halaman pagination, parameter search tidak hilang
+            ->paginate(5)->withQueryString(); 
 
         return view('mahasiswa.index', compact('mahasiswas'));
     }

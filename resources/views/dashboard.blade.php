@@ -51,9 +51,16 @@
                     width: 100%;
                     object-fit: cover;
                 }
+                .search-bar-container {
+                    border-radius: 50px;
+                    background-color: #ffffff;
+                }
+                .search-input:focus {
+                    box-shadow: none;
+                    border-color: transparent;
+                }
             </style>
 
-            <!-- 1. Welcome Banner -->
             <div class="welcome-banner text-white p-4 mb-4 shadow-sm d-flex align-items-center gap-4">
                 <div class="d-none d-md-block"> 
                     @if(Auth::user()->photo)
@@ -70,7 +77,6 @@
                 </div>
             </div>
 
-            <!-- 2. Grid Menu Utama -->
             <div class="row g-3 mb-5">
                 <div class="col-md-4">
                     <div class="card h-100 bg-white menu-card shadow-sm p-4 text-center">
@@ -98,18 +104,15 @@
                 </div>
             </div>
 
-            <!-- 3. Section Berita Pendidikan -->
             <div class="mb-3 d-flex align-items-center justify-content-between border-bottom pb-2">
                 <h5 class="fw-bold text-dark mb-0"><i class="bi bi-newspaper me-2 text-primary"></i> Berita Pendidikan</h5>
                 <a href="#" class="text-primary small text-decoration-none">Lihat Semua</a>
             </div>
 
             <div class="row g-3">
-                <!-- Berita 1 -->
                 <div class="col-md-4">
                     <div class="card news-card shadow-sm h-100">
                         <div class="position-relative">
-                            <!-- Menggunakan source Unsplash yang lebih stabil -->
                             <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=400&auto=format&fit=crop" class="news-img" alt="Wisuda">
                             <span class="badge bg-primary news-badge">Info Kampus</span>
                         </div>
@@ -120,7 +123,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Berita 2 -->
                 <div class="col-md-4">
                     <div class="card news-card shadow-sm h-100">
                         <div class="position-relative">
@@ -134,7 +136,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Berita 3 -->
                 <div class="col-md-4">
                     <div class="card news-card shadow-sm h-100">
                         <div class="position-relative">

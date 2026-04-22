@@ -17,9 +17,14 @@
                         <h4 class="mb-0 fw-bold text-dark">
                             <i class="bi bi-people-fill me-2 text-success"></i> Data Mahasiswa
                         </h4>
-                        <a href="{{ route('mahasiswa.create') }}" class="btn btn-success shadow-sm rounded-pill px-4 fw-medium">
-                            <i class="bi bi-person-plus-fill me-1"></i> Tambah Mahasiswa
-                        </a>
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('dashboard') }}" class="btn btn-light border shadow-sm rounded-pill px-4 fw-medium text-secondary">
+                                <i class="bi bi-arrow-left me-1"></i> Kembali
+                            </a>
+                            <a href="{{ route('mahasiswa.create') }}" class="btn btn-success shadow-sm rounded-pill px-4 fw-medium">
+                                <i class="bi bi-person-plus-fill me-1"></i> Tambah Mahasiswa
+                            </a>
+                        </div>
                     </div>
 
                     @if (session('success'))

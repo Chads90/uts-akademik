@@ -17,9 +17,14 @@
                         <h4 class="mb-0 fw-bold text-dark">
                             <i class="bi bi-journal-bookmark-fill me-2 text-success"></i> Data Matakuliah
                         </h4>
-                        <a href="{{ route('matakuliah.create') }}" class="btn btn-success text-white shadow-sm rounded-pill px-4 fw-medium">
-                            <i class="bi bi-plus-circle me-1"></i> Tambah Matakuliah
-                        </a>
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('dashboard') }}" class="btn btn-light border shadow-sm rounded-pill px-4 fw-medium text-secondary">
+                                <i class="bi bi-arrow-left me-1"></i> Kembali
+                            </a>
+                            <a href="{{ route('matakuliah.create') }}" class="btn btn-success text-white shadow-sm rounded-pill px-4 fw-medium">
+                                <i class="bi bi-plus-circle me-1"></i> Tambah Matakuliah
+                            </a>
+                        </div>
                     </div>
 
                     @if (session('success'))
@@ -44,7 +49,7 @@
                                     <th scope="col">NAMA MATAKULIAH</th>
                                     <th scope="col" class="text-center">SKS</th>
                                     <th scope="col">JURUSAN</th>
-                                    <th scope="col" class="text-center" style="width: 180px;">AKSI</th>
+                                    <th scope="col" class="text-center" style="width: 220px;">AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,13 +65,14 @@
                                         </span>
                                     </td>
                                     <td class="text-center">
+                                        
                                         <div class="d-flex justify-content-center gap-2">
                                             <a href="{{ route('matakuliah.edit', $mk->id_matakuliah) }}" class="btn btn-sm btn-outline-warning rounded-pill px-3">
-                                                <i class="bi bi-pencil-square"></i>
+                                                <i class="bi bi-pencil-square"></i> Edit
                                             </a>
                                             
                                             <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#deleteModalMk{{ $mk->id_matakuliah }}">
-                                                <i class="bi bi-trash"></i>
+                                                <i class="bi bi-trash"></i> Hapus
                                             </button>
                                         </div>
 

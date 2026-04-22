@@ -15,11 +15,16 @@
                     
                     <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
                         <h4 class="mb-0 fw-bold text-dark">
-                            <i class="bi bi-building me-2 text-primary"></i> Data Jurusan
+                            <i class="bi bi-building me-2 text-success"></i> Data Jurusan
                         </h4>
-                        <a href="{{ route('jurusan.create') }}" class="btn btn-primary text-white shadow-sm rounded-pill px-4 fw-medium">
-                            <i class="bi bi-plus-circle me-1"></i> Tambah Jurusan
-                        </a>
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('dashboard') }}" class="btn btn-light border shadow-sm rounded-pill px-4 fw-medium text-secondary">
+                                <i class="bi bi-arrow-left me-1"></i> Kembali
+                            </a>
+                            <a href="{{ route('jurusan.create') }}" class="btn btn-success text-white shadow-sm rounded-pill px-4 fw-medium">
+                                <i class="bi bi-plus-circle me-1"></i> Tambah Jurusan
+                            </a>
+                        </div>
                     </div>
 
                     @if (session('success'))
@@ -96,7 +101,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        </td>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
